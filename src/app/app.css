@@ -1,0 +1,114 @@
+.page {
+  font-family: system-ui, sans-serif;
+  max-width: 56rem;
+  margin: 2rem auto;
+  padding: 0 1rem 3rem;
+  display: grid;
+  gap: 1.25rem;
+  color: #1a1a1a;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 0.75rem;
+  color: #666;
+  margin: 0 0 0.35rem;
+}
+
+h1 {
+  font-size: 1.6rem;
+  line-height: 1.25;
+  margin: 0 0 0.75rem;
+}
+
+.lede,
+.hint {
+  color: #444;
+  line-height: 1.5;
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: end;
+}
+
+button,
+input {
+  font: inherit;
+  padding: 0.4rem 0.7rem;
+}
+
+.grid {
+  display: grid;
+  gap: 1rem;
+}
+
+@media (min-width: 48rem) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.card {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 1rem 1.15rem;
+  background: #fff;
+}
+
+.proposed {
+  background: #f7fbff;
+}
+
+.status {
+  font-family: ui-monospace, monospace;
+  font-size: 0.9rem;
+}
+
+.loading,
+.error,
+.idle,
+.muted {
+  margin: 0.4rem 0;
+}
+
+.loading {
+  background: #fff8e5;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+}
+
+.error {
+  background: #ffecec;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+}
+
+.idle,
+.muted {
+  color: #666;
+}
+
+.result {
+  background: #f7fff7;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+}
+
+pre {
+  overflow: auto;
+  background: #111;
+  color: #f3f3f3;
+  padding: 0.85rem 1rem;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+
+ul {
+  margin: 0;
+  padding-left: 1.2rem;
+}

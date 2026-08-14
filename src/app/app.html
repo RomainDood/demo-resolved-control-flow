@@ -1,0 +1,85 @@
+<main class="page">
+  <header>
+    <p class="eyebrow">Angular feature-request demo · POC</p>
+    <h1>Async <code>computed</code> + &#64;resolved / &#64;loading / &#64;error</h1>
+    <p class="lede">
+      Play the scenario below with today's <code>resource()</code> API. The right column is the
+      syntax a local Angular POC would compile — inspired by
+      <a href="https://www.solidjs.com/blog/solid-2-0-rc-the-big-reveal" target="_blank" rel="noreferrer"
+        >Solid.js 2.0</a
+      >
+      async computations + <code>&lt;Loading&gt;</code>.
+    </p>
+  </header>
+
+  <section class="toolbar">
+    <label>
+      Delay (ms)
+      <input type="number" [value]="delayMs()" (input)="delayMs.set(asNumber($event))" />
+    </label>
+    <button type="button" (click)="load('Ada', 'Lovelace')">Load Ada</button>
+    <button type="button" (click)="load('Grace', 'Hopper')">Load Grace</button>
+    <button type="button" (click)="userResource.reload()">Reload</button>
+    <button type="button" (click)="fail()">Error</button>
+    <button type="button" (click)="reset()">Reset</button>
+  </section>
+
+  <p class="status">
+    user: <strong>{{ userResource.status() }}</strong>
+    · greeting: <strong>{{ greetingResource.status() }}</strong>
+  </p>
+
+  <div class="grid">
+    <article class="card">
+      <h2>Today (this app, Angular {{ ngVersion }})</h2>
+      <p class="hint">Manual status branching. <code>value()</code> is <code>T | undefined</code>.</p>
+
+      @if (userResource.status() === 'idle') {
+        <p class="idle">No request yet.</p>
+      } @else if (userResource.status() === 'loading') {
+        <p class="loading">Loading user…</p>
+      } @else if (userResource.status() === 'error') {
+        <p class="error">{{ userResource.error()?.message }}</p>
+      } @else {
+        <div class="result">
+          <h3>{{ fullName() }}</h3>
+          @if (userResource.status() === 'reloading') {
+            <p class="muted">Reloading (stale-while-revalidate)…</p>
+          }
+          @if (greetingResource.status() === 'loading') {
+            <p class="loading">Loading greeting…</p>
+          } @else if (greetingResource.hasValue()) {
+            <p>{{ greetingResource.value() }}</p>
+          }
+        </div>
+      }
+    </article>
+
+    <article class="card proposed">
+      <h2>Proposed (POC, not in this build)</h2>
+      <p class="hint">
+        <code>resolved()</code> unwraps to <code>T</code>. Template reads must live in
+        <code>&#64;resolved</code>. Effects and resource <code>params</code> run only when ready.
+      </p>
+      <pre>{{ proposedTemplate }}</pre>
+      <pre>{{ proposedSyntax }}</pre>
+    </article>
+  </div>
+
+  <section class="card">
+    <h2>Effect log</h2>
+    <p class="hint">
+      Desired: the callback runs only when the user is resolved — not while idle, loading, or
+      errored. Today this is a manual <code>if</code>; the POC would do it automatically.
+    </p>
+    @if (effectLog().length === 0) {
+      <p class="idle">No effect run yet.</p>
+    } @else {
+      <ul>
+        @for (line of effectLog(); track $index) {
+          <li>{{ line }}</li>
+        }
+      </ul>
+    }
+  </section>
+</main>
