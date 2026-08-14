@@ -1,34 +1,27 @@
 # demo-resolved-control-flow
 
-Interactive reproduction for an Angular feature request: first-class async
-`computed()` values and `@resolved` / `@loading` / `@error` control flow,
-aligned with `resource()` statuses.
+Runnable reproduction of a **local Angular fork**: `resolved()`, async
+`computed()`, and `@resolved` / `@loading` / `@error`.
 
-This is a **conceptual POC demo** on public Angular 22.1. The proposed compiler
-syntax does not exist in this build. The left column runs today's
-`resource()` + status checks. The right column shows the API a local Angular
-fork compiled.
+Public npm Angular 22.1 cannot compile this syntax. The app vendors snapshot
+tarballs (`vendor/*.tgz`) built from the fork so StackBlitz and a fresh clone
+use that compiler/runtime.
 
-Inspired by [Solid.js 2.0](https://www.solidjs.com/blog/solid-2-0-rc-the-big-reveal)
-async computations and `<Loading>`.
+Inspired by [Solid.js 2.0](https://www.solidjs.com/blog/solid-2-0-rc-the-big-reveal).
 
 ## Angular version
 
-22.1.x (`@angular/core` / CLI 22.1)
+Fork snapshot `22.2.0-next.1` with local POC changes — not the public 22.1 release.
 
-## Constraints
+## How to observe
 
-- Standalone, CSS, no routing, no SSR, no tests
-- Only `resource()`, `computed()`, and `effect()` from `@angular/core`
-- No private Angular packages
+1. **Load Ada** — `@loading`, then `@resolved` with the name and greeting.
+2. **Reload** — previous content stays (stale-while-revalidate).
+3. **Load Grace** — `@loading` again, then the new name.
+4. **Error** — `@error`. The effect does not log.
+5. **Reset** — back to idle / `@loading`.
 
-## How to observe the scenario
-
-1. Click **Load Ada** — user goes `loading`, then the name and a chained greeting appear.
-2. Click **Reload** — the previous name stays visible (stale-while-revalidate).
-3. Click **Load Grace** — a new load replaces the previous value after loading.
-4. Click **Error** — the error branch is shown; the effect does not log.
-5. Click **Reset** — back to `idle`.
+Reading `fullName()` outside `@resolved` is a **compile-time** error.
 
 ## Commands
 
@@ -36,6 +29,30 @@ async computations and `<Loading>`.
 pnpm install
 pnpm start
 pnpm build
+```
+
+## Refresh vendor tarballs from the Angular monorepo
+
+```bash
+cd /path/to/angular
+pnpm build
+BAZEL_BIN=$(pnpm --silent bazel --ignore_all_rc_files info bazel-bin)
+VENDOR=/path/to/demo-resolved-control-flow/vendor
+for pkg in core compiler compiler-cli common platform-browser; do
+  (cd "$BAZEL_BIN/packages/$pkg/npm_package" && npm pack --silent --pack-destination "$VENDOR")
+done
+```
+
+Rename the packed files to `vendor/angular-<pkg>.tgz`.
+
+Official alternative for linking without tarballs (local only, not StackBlitz):
+
+```bash
+cd /path/to/angular
+pnpm ng-dev misc build-and-link /path/to/demo-resolved-control-flow
+cd /path/to/demo-resolved-control-flow
+pnpm exec ng cache disable
+node --preserve-symlinks --preserve-symlinks-main node_modules/@angular/cli/lib/init.js serve
 ```
 
 ## Links

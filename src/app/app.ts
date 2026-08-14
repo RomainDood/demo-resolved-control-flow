@@ -1,17 +1,10 @@
-import {Component, computed, effect, resource, signal, VERSION} from '@angular/core';
+import {Component, computed, effect, resource, resolved, signal, VERSION} from '@angular/core';
 
 interface User {
   first: string;
   last: string;
 }
 
-/**
- * Conceptual demo for an Angular feature request.
- *
- * Today's public API cannot express `@resolved` / `resolved()`.
- * This app reproduces the *scenario* with `resource()` + status checks,
- * and shows the proposed syntax next to it.
- */
 @Component({
   selector: 'app-root',
   templateUrl: './app.html',
@@ -47,55 +40,26 @@ export class App {
     },
   });
 
-  /** Today's workaround: derive only when the resource has a value. */
+  readonly user = resolved(this.userResource);
+
   readonly fullName = computed(() => {
-    const user = this.userResource.hasValue() ? this.userResource.value() : undefined;
-    return user ? `${user.first} ${user.last}` : undefined;
+    const u = this.user();
+    return `${u.first} ${u.last}`;
   });
 
-  /**
-   * Chained resource: waits for the user resource to resolve.
-   * Proposed: `params: () => this.fullName()` after `resolved(userResource)`.
-   */
-  readonly greetingResource = resource({
+  readonly greeting = computed(() => `Hello, ${this.fullName()}`);
+
+  readonly detailsResource = resource({
     params: () => this.fullName(),
     loader: async ({params, abortSignal}) => {
       await delay(400, abortSignal);
-      return `Hello, ${params}`;
+      return `Details for ${params}`;
     },
   });
 
-  readonly proposedSyntax = `user = resolved(this.userResource);
-fullName = computed(() => {
-  const u = this.user();
-  return \`\${u.first} \${u.last}\`;
-});
-
-effect(() => {
-  console.log(this.fullName()); // runs only when resolved
-});
-
-details = resource({
-  params: () => this.fullName(),
-  loader: ({params}) => fetchDetails(params),
-});`;
-
-  readonly proposedTemplate = `@resolved {
-  <h2>{{ fullName() }}</h2>
-  <p>{{ greeting() }}</p>
-} @loading {
-  <p>Loading…</p>
-} @error {
-  <p>Failed to load</p>
-}`;
-
   constructor() {
     effect(() => {
-      const name = this.fullName();
-      if (name === undefined) {
-        return;
-      }
-      this.effectLog.update((lines) => [`effect: ${name}`, ...lines].slice(0, 6));
+      this.effectLog.update((lines) => [`effect: ${this.greeting()}`, ...lines].slice(0, 6));
     });
   }
 

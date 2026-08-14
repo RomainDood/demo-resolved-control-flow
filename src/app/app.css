@@ -1,6 +1,6 @@
 .page {
   font-family: system-ui, sans-serif;
-  max-width: 56rem;
+  max-width: 42rem;
   margin: 2rem auto;
   padding: 0 1rem 3rem;
   display: grid;
@@ -23,7 +23,9 @@ h1 {
 }
 
 .lede,
-.hint {
+.hint,
+.muted,
+.idle {
   color: #444;
   line-height: 1.5;
 }
@@ -41,71 +43,37 @@ input {
   padding: 0.4rem 0.7rem;
 }
 
-.grid {
-  display: grid;
-  gap: 1rem;
-}
-
-@media (min-width: 48rem) {
-  .grid {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-.card {
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  padding: 1rem 1.15rem;
-  background: #fff;
-}
-
-.proposed {
-  background: #f7fbff;
-}
-
 .status {
   font-family: ui-monospace, monospace;
   font-size: 0.9rem;
 }
 
+.card,
+.result,
 .loading,
-.error,
-.idle,
-.muted {
-  margin: 0.4rem 0;
-}
-
-.loading {
-  background: #fff8e5;
-  padding: 0.75rem 1rem;
-  border-radius: 8px;
-}
-
 .error {
-  background: #ffecec;
-  padding: 0.75rem 1rem;
-  border-radius: 8px;
+  border-radius: 10px;
+  padding: 1rem 1.15rem;
 }
 
-.idle,
-.muted {
-  color: #666;
+.card {
+  border: 1px solid #ddd;
+  background: #fff;
 }
 
 .result {
   background: #f7fff7;
-  padding: 0.75rem 1rem;
-  border-radius: 8px;
+  border: 1px solid #cde8cd;
 }
 
-pre {
-  overflow: auto;
-  background: #111;
-  color: #f3f3f3;
-  padding: 0.85rem 1rem;
-  border-radius: 8px;
-  font-size: 0.78rem;
-  line-height: 1.45;
+.loading {
+  background: #fff8e5;
+  margin: 0;
+}
+
+.error {
+  background: #ffecec;
+  margin: 0;
 }
 
 ul {
