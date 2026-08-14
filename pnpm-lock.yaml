@@ -134,28 +134,28 @@ packages:
       rxjs: ^6.5.3 || ^7.4.0
 
   '@angular/compiler-cli@file:vendor/angular-compiler-cli.tgz':
-    resolution: {integrity: sha512-vM4RxnAW/Olk6JEWf94A9wdXZGhFpNZBxHTefh6m5Gjwq4snLVQgsHRMR5RLOShFmJJLCW/svJepGTT8eJEd5w==, tarball: file:vendor/angular-compiler-cli.tgz}
-    version: 22.2.0-next.1
+    resolution: {integrity: sha512-a0PCHNhWz/QJ8yF8lctqgBaorzE+hu8Wyh7jKA8uSvwNJCBRb/41KA/u+m8uYhD/90z+cVfcmR7BooufWSfzPQ==, tarball: file:vendor/angular-compiler-cli.tgz}
+    version: 0.0.0
     engines: {node: ^22.22.3 || ^24.15.0 || >=26.0.0}
     hasBin: true
     peerDependencies:
-      '@angular/compiler': 22.2.0-next.1+sha-87e0a24-with-local-changes
+      '@angular/compiler': 0.0.0
       typescript: '>=6.0 <6.1'
     peerDependenciesMeta:
       typescript:
         optional: true
 
   '@angular/compiler@file:vendor/angular-compiler.tgz':
-    resolution: {integrity: sha512-oeDyRj6y9iif0otCaQ4U0eVUO/7ctW0e0pg2A6qXGDHXTThhIlxzdbEsS54w5nyKdSShisQEkqJLe/wmQW/icg==, tarball: file:vendor/angular-compiler.tgz}
-    version: 22.2.0-next.1
+    resolution: {integrity: sha512-iMvOQo2HyBSjBT2ba8TVX35Cgi/y34hnx4T34JxaZ96jB7tw0GkNyBfwIsfy0U2SAHk/nEGqcYLToqXGpnSdCw==, tarball: file:vendor/angular-compiler.tgz}
+    version: 0.0.0
     engines: {node: ^22.22.3 || ^24.15.0 || >=26.0.0}
 
   '@angular/core@file:vendor/angular-core.tgz':
-    resolution: {integrity: sha512-jfQoByvyGfclLI+fHiOv6a0mx4SrDx2PsqKjpx9VcPsC7urzqUuIwNa6IJtby/P2KrpmVll8fv9GRdTSxgW+oQ==, tarball: file:vendor/angular-core.tgz}
-    version: 22.2.0-next.1
+    resolution: {integrity: sha512-ja3G9B3S3jZGhDSM7Ag7c/sloiyDiw54cpTY/blsuePZB+Pm5jsFWF3fMBxBRS0CcRg5RSZ45XJr8m6x3tHmPw==, tarball: file:vendor/angular-core.tgz}
+    version: 0.0.0
     engines: {node: ^22.22.3 || ^24.15.0 || >=26.0.0}
     peerDependencies:
-      '@angular/compiler': 22.2.0-next.1+sha-87e0a24-with-local-changes
+      '@angular/compiler': 0.0.0
       rxjs: ^6.5.3 || ^7.4.0
       zone.js: ~0.15.0 || ~0.16.0
     peerDependenciesMeta:

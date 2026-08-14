@@ -1,7 +1,7 @@
 # demo-resolved-control-flow
 
 Runnable reproduction of a **local Angular fork**: `resolved()`, async
-`computed()`, and `@resolved` / `@loading` / `@error`.
+`computed()`, and `@resolved` / `@loading` / `@error` / `@idle`.
 
 Public npm Angular 22.1 cannot compile this syntax. The app vendors snapshot
 tarballs (`vendor/*.tgz`) built from the fork so StackBlitz and a fresh clone
@@ -19,7 +19,7 @@ Fork snapshot `22.2.0-next.1` with local POC changes — not the public 22.1 rel
 2. **Reload** — previous content stays (stale-while-revalidate).
 3. **Load Grace** — `@loading` again, then the new name.
 4. **Error** — `@error`. The effect does not log.
-5. **Reset** — back to idle / `@loading`.
+5. **Reset** — `@idle` (no request yet). First paint is also `@idle`.
 
 Reading `fullName()` outside `@resolved` is a **compile-time** error.
 

@@ -51,7 +51,8 @@ input {
 .card,
 .result,
 .loading,
-.error {
+.error,
+.waiting {
   border-radius: 10px;
   padding: 1rem 1.15rem;
 }
@@ -73,6 +74,11 @@ input {
 
 .error {
   background: #ffecec;
+  margin: 0;
+}
+
+.waiting {
+  background: #eef2ff;
   margin: 0;
 }
 

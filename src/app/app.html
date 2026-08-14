@@ -1,7 +1,7 @@
 <main class="page">
   <header>
     <p class="eyebrow">Angular POC · fork snapshot, not npm 22.1</p>
-    <h1>resolved() + &#64;resolved / &#64;loading / &#64;error</h1>
+    <h1>resolved() + &#64;resolved / &#64;loading / &#64;error / &#64;idle</h1>
     <p class="lede">
       This app compiles against a snapshot of a local Angular fork ({{ ngVersion }}). Inspired by
       <a href="https://www.solidjs.com/blog/solid-2-0-rc-the-big-reveal" target="_blank" rel="noreferrer"
@@ -39,6 +39,8 @@
     <p class="loading">Loading…</p>
   } @error {
     <p class="error">{{ userResource.error()?.message ?? 'Failed to load' }}</p>
+  } @idle {
+    <p class="waiting">No request yet. Load a user to start.</p>
   }
 
   <section class="card">
